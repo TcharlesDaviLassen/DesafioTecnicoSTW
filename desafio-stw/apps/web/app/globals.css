@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  @apply font-sans;
+}
+
+.flex {
+  align-items: center;
+}
+
+.bg-black.critical {
+  height: 100%;
+}

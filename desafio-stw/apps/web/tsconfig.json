@@ -1,0 +1,38 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "app/*",
+      ],
+      "@repo/db-prisma": [
+        "../../packages/db"
+      ],
+      "@repo/db-prisma/*": [
+        "../../packages/db/*"
+      ],
+      "@repo/types/*": [
+        "../../packages/types/*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.js",
+    ".next/types/**/*.ts",
+    "../../packages/ui/**/*.{js,ts,jsx,tsx}",
+    "../../packages/db",
+    "../../packages/types"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

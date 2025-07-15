@@ -1,0 +1,56 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum MachineState {
+  RUNNING
+  STOPPED
+  MAINTENANCE
+  ERROR
+}
+
+model MachineStatus {
+  id         String         @id @default(uuid())
+  timestamp  DateTime
+  state      MachineState
+
+  metricsId  String         @unique
+  metrics    MachineMetrics @relation(fields: [metricsId], references: [id])
+
+  oeeId      String         @unique
+  oee        OverallOEE     @relation(fields: [oeeId], references: [id])
+}
+
+model MachineMetrics {
+  id          String  @id @default(uuid())
+  temperature Float
+  rpm         Int
+  uptime      Int
+  efficiency  Float
+
+  machineStatus MachineStatus?
+}
+
+model OverallOEE {
+  id            String  @id @default(uuid())
+  overall       Float
+  availability  Float
+  performance   Float
+  quality       Float
+
+  machineStatus MachineStatus?
+}
+
+model Alert {
+  id            String   @id @default(uuid())
+  level         String
+  message       String
+  component     String
+  timestamp     DateTime
+  acknowledged  Boolean
+}
