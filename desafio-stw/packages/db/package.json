@@ -9,7 +9,10 @@
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit",
-    "seed": "tsx src/seed.ts"
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev --name create-and-insert-tables",
+    "genemig": "npm run generate && npm run migrate",
+    "seed": "npm run genemig && tsx src/seed.ts"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
